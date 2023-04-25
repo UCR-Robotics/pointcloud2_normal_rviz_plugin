@@ -1,0 +1,13 @@
+---
+Language: Cpp
+BasedOnStyle: Google
+ColumnLimit: 120
+ContinuationIndentWidth: 4
+DerivePointerAlignment: false
+IndentWidth: 2
+MaxEmptyLinesToKeep: 1
+PointerAlignment: Left
+SortIncludes: false
+TabWidth: 2
+UseTab: Never
+...

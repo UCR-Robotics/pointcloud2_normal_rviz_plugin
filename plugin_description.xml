@@ -1,0 +1,10 @@
+<library path="lib/libpointcloud2_normal_rviz_plugin">
+  <class name="PointCloud2 Normal"
+         type="rviz::PointCloud2NormalDisplay"
+         base_class_type="rviz::Display">
+    <description>
+      Display normal vectors of points in a point cloud (sensor_msgs::PointCloud2), if available.
+    </description>
+  </class>
+
+</library>
