@@ -58,11 +58,6 @@
 namespace rviz {
 
 PointCloudNormal::PointCloudNormal(Display* display) : display_(display), buffer_index_(0), current_mode_(NM_ARROW) {
-  style_property_ = new EnumProperty("Style", "Arrow", "Rendering mode to use, in order of computational complexity.",
-                                     display_, SLOT(updateStyle()), this);
-  style_property_->addOption("2D Arrow", PointCloudNormal::NM_2D_ARROW);
-  style_property_->addOption("Arrow", PointCloudNormal::NM_ARROW);
-
   arrow_color_property_ = new ColorProperty("Arrow Color", QColor(0x66, 0xcc, 0xff), "Color of the normal arrows",
                                             display_, SLOT(updateArrowColor()), this);
 
@@ -77,19 +72,24 @@ PointCloudNormal::PointCloudNormal(Display* display) : display_(display), buffer
       new IntProperty("Buffer Length", 1, "Number of frames to display.", display_, SLOT(updateBufferLength()), this);
   buffer_length_property_->setMin(1);
 
-  arrow_shaft_length_property_ =
-      new FloatProperty("Shaft Length", 0.3, "Length of the arrow shaft.", display_, SLOT(updateArrowGeometry()), this);
-  arrow_head_length_property_ =
-      new FloatProperty("Head Length", 0.2, "Length of the arrow head.", display_, SLOT(updateArrowGeometry()), this);
-  arrow_shaft_diameter_property_ = new FloatProperty("Shaft Diameter", 0.1, "Diameter of the arrow shaft.", display_,
-                                                     SLOT(updateArrowGeometry()), this);
-  arrow_head_diameter_property_ = new FloatProperty("Head Diameter", 0.3, "Diameter of the arrow head.", display_,
-                                                    SLOT(updateArrowGeometry()), this);
+  style_property_ = new EnumProperty("Style", "Arrow", "Rendering mode to use, in order of computational complexity.",
+                                     display_, SLOT(updateStyle()), this);
+  style_property_->addOption("2D Arrow", PointCloudNormal::NM_2D_ARROW);
+  style_property_->addOption("Arrow", PointCloudNormal::NM_ARROW);
+
+  arrow_shaft_length_property_ = new FloatProperty("Shaft Length", 0.3, "Length of the arrow shaft.", style_property_,
+                                                   SLOT(updateArrowGeometry()), this);
+  arrow_head_length_property_ = new FloatProperty("Head Length", 0.2, "Length of the arrow head.", style_property_,
+                                                  SLOT(updateArrowGeometry()), this);
+  arrow_shaft_diameter_property_ = new FloatProperty("Shaft Diameter", 0.1, "Diameter of the arrow shaft.",
+                                                     style_property_, SLOT(updateArrowGeometry()), this);
+  arrow_head_diameter_property_ = new FloatProperty("Head Diameter", 0.3, "Diameter of the arrow head.",
+                                                    style_property_, SLOT(updateArrowGeometry()), this);
 
   pix_arrow_shaft_length_property_ = new FloatProperty("2D Arrow Shaft Length", 0.5, "Length of the 2D arrow shaft.",
-                                                       display_, SLOT(updatePixArrowGeometry()), this);
+                                                       style_property_, SLOT(updatePixArrowGeometry()), this);
   pix_arrow_head_length_property_ = new FloatProperty("2D Arrow Head Length", 0.2, "Length of the 2D arrow head.",
-                                                      display_, SLOT(updatePixArrowGeometry()), this);
+                                                      style_property_, SLOT(updatePixArrowGeometry()), this);
   pix_arrow_shaft_length_property_->hide();
   pix_arrow_head_length_property_->hide();
 }

@@ -55,7 +55,6 @@ void PointCloud2NormalDisplay::onInitialize() {
   update_nh_.setCallbackQueue(context_->getThreadedQueue());
 
   MFDClass::onInitialize();
-  ROS_DEBUG("1");
   point_cloud_normal_->initialize(context_, scene_node_);
 }
 
