@@ -47,7 +47,7 @@ PixArrow::PixArrow(Ogre::SceneManager* manager, Ogre::SceneNode* parent_node) : 
 
   static int count = 0;
   std::stringstream ss;
-  ss << "LineMaterial" << count++;
+  ss << "PixArrowMaterial" << count++;
 
   // NOTE: The second parameter to the create method is the resource group the material will be added to.
   // If the group you name does not exist (in your resources.cfg file) the library will assert() and your
